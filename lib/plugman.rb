@@ -42,6 +42,7 @@ class Plugman
     plugin.send(event, *arguments, &block)
   rescue Exception => e
     @logger.error(e)
+    throw e
   end
 
 end
