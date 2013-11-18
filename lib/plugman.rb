@@ -12,6 +12,7 @@ class Plugman
     @plugins = args[:plugins] || []
     @logger  = args[:logger]
     @loader  = args[:loader]
+    @escalate = args[:escalate] || false
 
     if @logger.nil?
       @logger = Logger.new(STDERR)
@@ -42,7 +43,7 @@ class Plugman
     plugin.send(event, *arguments, &block)
   rescue Exception => e
     @logger.error(e)
-    raise e
+    raise e if @escalate
   end
 
 end
